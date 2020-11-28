@@ -4,7 +4,6 @@ import Text from './Text';
 import RepositoryLogo from './RepositoryLogo';
 import RepositoryDescription from './RepositoryDescription';
 import RepositoryDetails from './RepositoryDetails';
-import numberFormatter from '../utils'
 
 const repositoryItemStyles = StyleSheet.create({
   container: {

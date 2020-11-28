@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-native';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
 import { Formik, useField } from 'formik';
 import * as yup from 'yup';
@@ -6,6 +7,7 @@ import * as yup from 'yup';
 import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 import theme from '../theme';
+import useSignIn from '../hooks/useSignIn';
 
 const styles = StyleSheet.create({
    container: {
@@ -45,13 +47,18 @@ const validationSchema = yup.object().shape({
 });
 
 const SignIn = () => {
-  const onSubmit = values => {
-      const username = values.username;
-      const password = values.password;
+   const [signIn] = useSignIn();
+   const history = useHistory();
 
-        console.error(`Username is: ${username}`);
-        console.error(`Username is: $password`);
+  const onSubmit = async (values) => {
 
+      const { username, password } = values;
+      try {
+            await signIn({ username, password });
+            history.push("/");
+      } catch (e) {
+            console.log(e);
+      }
     };
 
     return (

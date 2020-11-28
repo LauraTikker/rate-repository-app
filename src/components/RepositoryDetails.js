@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import Text from './Text';
-import numberFormatter from '../utils'
+import numberFormatter from '../utils/numberFormatter'
 
 const repositoryDetailsStyles = StyleSheet.create({
   container: {
