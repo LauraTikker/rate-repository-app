@@ -1,46 +1,45 @@
-import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_REPOSITORIES } from '../graphql/queries';
-import RepositoryItem from './RepositoryItem';
-
-const styles = StyleSheet.create({
-   container: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginBottom: '45%',
-   },
-  separator: {
-    height: 10,
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
+import React, { useState } from 'react';
+import RepositoryListContainer from './RepositoryListContainer';
+import useRepositoryQuery from '../hooks/useRepositoryQuery';
 
 const RepositoryList = () => {
-      const { data, error, loading } = useQuery(GET_REPOSITORIES, {
-              fetchPolicy: 'cache-and-network',
-            });
+  const [orderBy, setOrderBy] = useState('CREATED_AT');
+  const [orderDirection, setOrderDirection] = useState('DESC');
+  const [searchQuery, setSearchQuery] = useState('');
+  const { repositories, fetchMore } = useRepositoryQuery(4, orderBy, orderDirection, searchQuery);
 
-      const repositoryNodes = data
-           ? data.repositories.edges.map(edge => edge.node)
-           : [];
+  const orderByHighestRated = () => {
+        setOrderBy('RATING_AVERAGE');
+        setOrderDirection('DESC');
+  };
 
-  return (
-    <View style={styles.container}>
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({item}) => {
-      return (
-      <RepositoryItem
-            key={item.id}
-            item={item}
-            />
-      )}}
-    />
-    </View>
-  );
+  const orderByLowestRated = () => {
+        setOrderBy('RATING_AVERAGE');
+        setOrderDirection('ASC');
+   };
+
+  const orderByLatestReview = () => {
+        setOrderBy('CREATED_AT');
+        setOrderDirection('DESC');
+  };
+
+  const onChangeSearch = (query) => {
+        setSearchQuery(query);
+  };
+
+  const onEndReach = () => {
+      fetchMore();
+  };
+
+  return <RepositoryListContainer
+        repositories={repositories}
+        orderByHighestRated={orderByHighestRated}
+        orderByLowestRated={orderByLowestRated}
+        orderByLatestReview={orderByLatestReview}
+        onChangeSearch={onChangeSearch}
+        searchQuery={searchQuery}
+        onEndReach={onEndReach}
+        />;
 };
 
 export default RepositoryList;

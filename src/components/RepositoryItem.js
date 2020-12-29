@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import Text from './Text';
+import { View, StyleSheet } from 'react-native';
 import RepositoryLogo from './RepositoryLogo';
 import RepositoryDescription from './RepositoryDescription';
 import RepositoryDetails from './RepositoryDetails';
+import RepositoryInfo from './RepositoryInfo';
 
 const repositoryItemStyles = StyleSheet.create({
   container: {
@@ -16,12 +16,12 @@ const repositoryItemStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     marginTop: '5%',
-     marginBottom: '5%',
-     flexGrow: 0,
-    },
+    marginBottom: '5%',
+    flexGrow: 0,
+   },
 });
 
-const RepositoryItem = ({item}) => {
+const RepositoryItem = ({item, showRepositoryInfo}) => {
   return (
     <View style={repositoryItemStyles.container}>
         <View style={repositoryItemStyles.repositoryInformationRow}>
@@ -29,6 +29,7 @@ const RepositoryItem = ({item}) => {
             <RepositoryDescription item={item} />
         </View>
        <RepositoryDetails item={item} />
+       {showRepositoryInfo ? <RepositoryInfo id={item.id} url={item.url}/> : null}
      </View>
   );
 };

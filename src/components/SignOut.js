@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useHistory } from 'react-router-native';
 import { useApolloClient } from '@apollo/client';
 import AuthStorageContext from '../contexts/AuthStorageContext';
-
-import Text from './Text';
 
 const SignOut = () => {
    const authStorage = useContext(AuthStorageContext);

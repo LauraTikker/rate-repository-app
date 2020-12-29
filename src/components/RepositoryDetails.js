@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Text from './Text';
-import numberFormatter from '../utils/numberFormatter'
+import numberFormatter from '../utils/numberFormatter';
 
 const repositoryDetailsStyles = StyleSheet.create({
   container: {
@@ -18,19 +18,19 @@ const RepositoryDetails = ({item}) => {
   return (
       <View style={repositoryDetailsStyles.container}>
             <View>
-                <Text fontWeight='bold'>{numberFormatter(item.stargazersCount)}</Text>
+                <Text fontWeight='bold' testID='itemStargazeCount'>{numberFormatter(item.stargazersCount)}</Text>
                 <Text fontSize='subheading' color='textSecondary'>Stars</Text>
             </View>
             <View>
-                <Text fontWeight='bold'>{numberFormatter(item.forksCount)}</Text>
+                <Text fontWeight='bold' testID='itemForksCount'>{numberFormatter(item.forksCount)}</Text>
                 <Text fontSize='subheading' color='textSecondary'>Forks</Text>
             </View>
             <View>
-                <Text fontWeight='bold'>{numberFormatter(item.reviewCount)}</Text>
+                <Text fontWeight='bold' testID='itemReviewCount'>{numberFormatter(item.reviewCount)}</Text>
                 <Text fontSize='subheading' color='textSecondary'>Reviews</Text>
              </View>
              <View>
-                <Text fontWeight='bold'>{numberFormatter(item.ratingAverage)}</Text>
+                <Text fontWeight='bold' testID='itemRatingAverage'>{numberFormatter(item.ratingAverage)}</Text>
                 <Text fontSize='subheading' color='textSecondary'>Rating</Text>
              </View>
        </View>

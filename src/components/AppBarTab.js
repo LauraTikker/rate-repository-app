@@ -20,7 +20,7 @@ const AppBar = ({ tabName, link }) => {
                 </Link>
             </TouchableWithoutFeedback>
         </View>
-  )
+  );
 };
 
 export default AppBar;

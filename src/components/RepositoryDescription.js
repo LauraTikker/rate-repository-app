@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Text from './Text';
 
 const repositoryDescriptionStyles =  StyleSheet.create({
@@ -38,12 +38,12 @@ const languageStyles =  StyleSheet.create({
 const RepositoryDescription = ({item}) => {
   return (
         <View style={repositoryDescriptionStyles.container}>
-            <Text fontWeight='bold' color='black' fontSize='heading'>{item.fullName}</Text>
+            <Text fontWeight='bold' color='black' fontSize='heading' testID="itemFullName">{item.fullName}</Text>
             <View style={repositoryDescriptionStyles.descriptionView}>
-            <Text fontSize='subheading' color='textSecondary' style={repositoryDescriptionStyles.text}>{item.description}</Text>
+            <Text fontSize='subheading' color='textSecondary' style={repositoryDescriptionStyles.text} testID="itemDescription">{item.description}</Text>
             </View>
               <View style={languageStyles.container}>
-                   <Text style={languageStyles.languageText} fontSize='subheading' color='white'>{item.language}</Text>
+                   <Text style={languageStyles.languageText} fontSize='subheading' color='white' testID="itemLanguage">{item.language}</Text>
                </View>
         </View>
   );
